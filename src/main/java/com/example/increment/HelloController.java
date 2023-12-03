@@ -27,14 +27,15 @@ public class HelloController {
 
     public HelloController() throws IOException {
         socket = new Socket("localhost", 8081);
-        System.out.println("1");
-    }
 
+    }
+    int response = 0;
     @FXML
     void onHelloButtonClick(ActionEvent event) {
         OutputStream outputStream = null;
         try {
-            System.out.println("2");
+            response++;
+            schot.setText("schot" + response);
             outputStream = socket.getOutputStream();
             outputStream.write(1);
             outputStream.flush();
@@ -42,7 +43,6 @@ public class HelloController {
             throw new RuntimeException(e);
         }
     }
-    int response = 0;
 
     @FXML
     Socket socket;
