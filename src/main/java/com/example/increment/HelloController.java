@@ -30,15 +30,32 @@ public class HelloController {
 
     }
     int response = 0;
+    int add = 1;
     @FXML
     void onHelloButtonClick(ActionEvent event) {
         OutputStream outputStream = null;
         try {
-            response++;
-            schot.setText("schot" + response);
+            response+=add;
+            schot.setText("Счёт " + response);
             outputStream = socket.getOutputStream();
             outputStream.write(1);
             outputStream.flush();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    @FXML
+    void onHelloButtonClick1(ActionEvent event) {
+        OutputStream outputStream = null;
+        try {
+            if(response >= add*5){
+                response-=add*5;
+                add++;
+                schot.setText("Счёт " + response);
+                outputStream = socket.getOutputStream();
+                outputStream.write(1);
+                outputStream.flush();
+            }
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
